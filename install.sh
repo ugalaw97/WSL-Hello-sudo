@@ -60,7 +60,7 @@ if [[ ! -e "${MNT}" ]]; then
   read -r MNT
 fi
 
-WINUSER=$("${MNT}/Windows/System32/cmd.exe" /C "echo | set /p dummy=%username%") # Hacky. Get Windows's user name without new line
+WINUSER=etseq
 DEF_PAM_WSL_HELLO_WINPATH="${MNT}/Users/$WINUSER/AppData/Local/Programs/wsl-hello-sudo"
 OLD_DEF_PAM_WSL_HELLO_WINPATH="${MNT}/Users/$WINUSER/pam_wsl_hello"
 
@@ -92,7 +92,7 @@ set +x
 echo_stage "Installing Windows component of WSL-Hello-sudo..."
 set -x
 cp build/WindowsHelloBridge.exe "$PAM_WSL_HELLO_WINPATH/"
-chmod +x "$PAM_WSL_HELLO_WINPATH/WindowsHelloBridge.exe"
+sudo chmod +x "$PAM_WSL_HELLO_WINPATH/WindowsHelloBridge.exe"
 
 set +x
 echo_stage "Installing PAM module to the Linux system..."
